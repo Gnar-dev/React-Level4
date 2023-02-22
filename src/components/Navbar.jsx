@@ -1,19 +1,34 @@
 import React from "react";
+import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 const Navbar = ({ isLogin, setIsLogin }) => {
   const navigate = useNavigate();
-  const navList = ["위스키", "와인", "전통주", "럼", "리퀴르"];
+  const navList = ["제품등록", "제품확인"];
   const search = (e) => {
     if (e.key === "Enter") {
       let keyword = e.target.value;
       navigate(`/?q=${keyword}`);
+      //navigate(`/products/${keyword}`)
     }
   };
   const haveToLogin = () => {
     navigate("/login");
   };
+  const addProductPage = () => {
+    navigate("/product/add");
+  };
+  const goHome = () => {
+    navigate("/");
+  };
+  let name = useQuery("userName", () =>
+    axios.get().then((a) => {
+      return a.data;
+    }),
+  );
+
   return (
     <NavbarContainer>
       <TitleWrap>
@@ -24,21 +39,22 @@ const Navbar = ({ isLogin, setIsLogin }) => {
       </TitleWrap>
       <LoginWrap>
         {isLogin ? (
-          <LogoutBtn onClick={() => setIsLogin(false)}>로그아웃</LogoutBtn>
+          <LogoutBtn onClick={() => setIsLogin(false)}>
+            <div>{name.isLoading ? "로딩중" : name.data.name}</div>로그아웃
+          </LogoutBtn>
         ) : (
           <LoginBtn onClick={haveToLogin}>로그인</LoginBtn>
         )}
       </LoginWrap>
       <NavWrap>
         <NavUl>
-          {navList.map((e) => {
-            return <li>{e}</li>;
-          })}
+          <Navli onClick={addProductPage}>제품등록</Navli>
+          <Navli onClick={goHome}>제품확인</Navli>
         </NavUl>
         <NavPosition>
           <NavInputWrap>
             <NavIcon
-              class="material-symbols-rounded"
+              classNa="material-symbols-rounded"
               onClick={(e) => search(e)}
             >
               search
@@ -105,6 +121,11 @@ const NavUl = styled.ul`
   font-weight: 700;
   color: red;
 `;
+const Navli = styled.li`
+  :hover {
+    color: green;
+  }
+`;
 
 const NavPosition = styled.div`
   position: absolute;
@@ -128,7 +149,6 @@ const NavIcon = styled.span`
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  -webkit-font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
   width: 30px;
   height: 30px;

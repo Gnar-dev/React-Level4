@@ -6,6 +6,7 @@ import PrivateRoute from "./page/PrivateRoute";
 import { useState } from "react";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import AddProduct from "./page/AddProduct";
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
@@ -20,9 +21,10 @@ const Router = () => {
       <Navbar isLogin={isLogin} setIsLogin={setIsLogin} />
       <Routes>
         <Route path="/" element={<ProductAll />} />
+        <Route path="/product/add" element={<AddProduct />} />
         <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
         <Route
-          path="/product/:id"
+          path="/products/:id"
           element={<PrivateRoute isLogin={isLogin} />}
         />
       </Routes>
