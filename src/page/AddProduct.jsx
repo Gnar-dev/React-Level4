@@ -3,7 +3,6 @@ import { useMutation, useQueryClient } from "react-query";
 import { addProduct } from "../axios/api";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-import ProductCard from "./../components/ProductCard";
 import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
@@ -44,6 +43,7 @@ const AddProduct = () => {
 
   const handleSubmit = (event) => {
     navigate("/");
+    event.preventDefault();
     if (!name || !price) {
       return getErrorMsg("01", { name, price });
     }
@@ -56,11 +56,10 @@ const AddProduct = () => {
       price,
       comments: [
         {
-          // id: 1,
-          // nick: "gibeom",
-          // body: "some comment",
-          // postId: 1,
-          // status: false
+          nick: "",
+          body: "",
+          postId: uuidv4(),
+          status: false,
         },
       ],
     };

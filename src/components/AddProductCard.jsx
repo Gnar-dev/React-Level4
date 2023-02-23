@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useMutation, useQueryClient } from "react-query";
+
 const AddProductCard = () => {
   const navigate = useNavigate();
 
@@ -25,6 +25,9 @@ const AddCard = styled.div`
   border: 2px solid gray;
   box-shadow: 5px 5px 10px 2px gray;
   margin: 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const PlusIcon = styled.span`
   font-family: "Material Symbols Outlined";
@@ -40,9 +43,4 @@ const PlusIcon = styled.span`
   direction: ltr;
   -webkit-font-smoothing: antialiased;
   transform: scale(2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
 `;

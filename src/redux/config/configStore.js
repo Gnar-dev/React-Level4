@@ -5,9 +5,9 @@ import products from "../modules/products";
 
 const store = configureStore({
   reducer: {
-    comments,
-    products,
-    users,
+    comments: comments,
+    products: products,
+    users: users,
   },
 });
 

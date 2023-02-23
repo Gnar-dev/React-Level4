@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
 import AddProductCard from "../components/AddProductCard";
 import ProductCard from "../components/ProductCard";
-import api from "../axios/api";
 import { getProducts } from "../axios/api";
 import { useQuery } from "react-query";
 
@@ -32,4 +30,6 @@ export default ProductAll;
 const ProductContainer = styled.div`
   display: flex;
   padding: 5%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 `;

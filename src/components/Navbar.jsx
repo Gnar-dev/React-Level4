@@ -1,12 +1,10 @@
 import React from "react";
-import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
 const Navbar = ({ isLogin, setIsLogin }) => {
   const navigate = useNavigate();
-  const navList = ["제품등록", "제품확인"];
   const search = (e) => {
     if (e.key === "Enter") {
       let keyword = e.target.value;
@@ -23,25 +21,18 @@ const Navbar = ({ isLogin, setIsLogin }) => {
   const goHome = () => {
     navigate("/");
   };
-  let name = useQuery("userName", () =>
-    axios.get().then((a) => {
-      return a.data;
-    }),
-  );
 
   return (
     <NavbarContainer>
       <TitleWrap>
         <Link to="/">
           <Title>기범's 술창고</Title>
-          <TitleImg src="img/neon.jpg" alt="술술술" />
+          <TitleImg src="img/whiskey.jpg" alt="술술술" />
         </Link>
       </TitleWrap>
       <LoginWrap>
         {isLogin ? (
-          <LogoutBtn onClick={() => setIsLogin(false)}>
-            <div>{name.isLoading ? "로딩중" : name.data.name}</div>로그아웃
-          </LogoutBtn>
+          <LogoutBtn onClick={() => setIsLogin(false)}>로그아웃</LogoutBtn>
         ) : (
           <LoginBtn onClick={haveToLogin}>로그인</LoginBtn>
         )}
@@ -87,18 +78,18 @@ const Title = styled.h1`
   transform: translate(-50%, -50%);
   font-size: 24px;
   font-weight: 900;
-  color: white;
+  color: black;
 `;
 const TitleImg = styled.img`
   width: 100%;
-  height: 300px;
+  height: 350px;
 `;
 
 ///////Login CSS//////////
 const LoginWrap = styled.div`
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 30px;
+  right: 100px;
   z-index: 99;
   color: white;
   font-size: 24px;
@@ -113,17 +104,20 @@ const LoginBtn = styled.div`
 const NavWrap = styled.div`
   display: flex;
   justify-content: center;
+  background-color: black;
+  transform: translateY(-8px);
 `;
 const NavUl = styled.ul`
+  margin: 30px auto;
   display: flex;
   gap: 10vw;
   font-size: 20px;
   font-weight: 700;
-  color: red;
+  color: white;
 `;
 const Navli = styled.li`
   :hover {
-    color: green;
+    color: gold;
   }
 `;
 
@@ -134,8 +128,9 @@ const NavPosition = styled.div`
 const NavInputWrap = styled.div`
   position: relative;
   z-index: 1;
-  width: 7vw;
-  height: 22px;
+  width: 200px;
+  height: 30px;
+  margin: 30px auto;
 `;
 const NavIcon = styled.span`
   font-family: "Material Symbols Rounded";
@@ -160,10 +155,14 @@ const NavIcon = styled.span`
 `;
 const NavInput = styled.input`
   position: absolute;
-  width: 100%;
-  height: 100%;
   z-index: -1;
   border: 0;
   border-bottom: 2px solid black;
   outline: none;
+  background-color: black;
+  ::placeholder {
+    padding: 5px;
+    font-weight: 700;
+    color: white;
+  }
 `;
